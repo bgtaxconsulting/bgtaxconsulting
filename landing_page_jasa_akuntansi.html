@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG Tax Consulting - Konsultasi Pajak & Akuntansi</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0B335C',
+                            navyhover: '#082543',
+                            gold: '#F2A900',
+                            goldhover: '#D99700',
+                            light: '#F8FAFC',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 10px 40px -10px rgba(11, 51, 92, 0.1)',
+                        'gold': '0 4px 20px -5px rgba(242, 169, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        
+        /* Custom list style for services */
+        .check-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .check-list li::before {
+            content: '\f058'; /* FontAwesome check-circle */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: #0B335C;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-brand-gold selection:text-white">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="flex flex-col">
+                        <div class="flex items-center gap-2">
+                            <span class="text-4xl font-extrabold text-brand-navy tracking-tighter">B<span class="text-brand-gold">G</span></span>
+                            <div class="h-8 w-px bg-gray-300 mx-1"></div>
+                            <div class="flex flex-col">
+                                <span class="text-lg font-bold text-brand-navy leading-none tracking-wide">BG TAX CONSULTING</span>
+                                <span class="text-[0.65rem] font-semibold text-brand-gold uppercase tracking-widest mt-1">Pajak &bull; Akuntansi &bull; Solusi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-gray-700 hover:text-brand-gold font-medium transition">Beranda</a>
+                    <a href="#keunggulan" class="text-gray-700 hover:text-brand-gold font-medium transition">Keunggulan</a>
+                    <a href="#layanan" class="text-gray-700 hover:text-brand-gold font-medium transition">Layanan</a>
+                    <a href="#kontak" class="text-gray-700 hover:text-brand-gold font-medium transition">Kontak</a>
+                    <a href="https://wa.me/6285178590919" target="_blank" class="bg-brand-navy hover:bg-brand-navyhover text-white px-6 py-2.5 rounded-full font-semibold transition-all transform hover:-translate-y-0.5 shadow-lg flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-brand-gold text-lg"></i> Konsultasi GRATIS
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-navy hover:text-brand-gold focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg">
+                <a href="#beranda" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-navy hover:bg-gray-50 rounded-md">Beranda</a>
+                <a href="#keunggulan" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-navy hover:bg-gray-50 rounded-md">Keunggulan</a>
+                <a href="#layanan" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-navy hover:bg-gray-50 rounded-md">Layanan</a>
+                <a href="#kontak" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-navy hover:bg-gray-50 rounded-md">Kontak</a>
+                <div class="pt-4">
+                    <a href="https://wa.me/6285178590919" target="_blank" class="flex items-center justify-center gap-2 w-full text-center bg-brand-navy text-white px-6 py-3 rounded-full font-bold transition">
+                        <i class="fab fa-whatsapp text-brand-gold text-xl"></i> Konsultasi GRATIS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-brand-navy">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Accounting Background" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/90 to-brand-navy/60"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl reveal">
+                <div class="inline-block transform -skew-x-12 bg-brand-gold px-6 py-2 mb-6">
+                    <p class="transform skew-x-12 text-brand-navy font-bold italic tracking-wide">Mitra Terpercaya untuk Bisnis Anda</p>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+                    KONSULTASI <br>
+                    <span class="text-brand-gold">PAJAK & AKUNTANSI</span>
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-10 leading-relaxed font-medium">
+                    Solusi Profesional untuk Kebutuhan Pajak dan Keuangan Anda.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://wa.me/6285178590919" target="_blank" class="inline-flex justify-center items-center bg-brand-gold hover:bg-brand-goldhover text-brand-navy px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-gold">
+                        <i class="fab fa-whatsapp mr-2 text-xl"></i> Konsultasi Sekarang
+                    </a>
+                    <a href="#layanan" class="inline-flex justify-center items-center bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-navy px-8 py-4 rounded-full font-bold text-lg transition-all">
+                        Pelajari Layanan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="keunggulan" class="relative -mt-12 z-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-card p-6 md:p-8 reveal delay-100 border border-gray-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                    
+                    <div class="flex items-center gap-4 pt-4 md:pt-0 md:px-4 first:pt-0 first:px-0">
+                        <div class="w-12 h-12 rounded-full bg-brand-navy/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-shield-alt text-brand-navy text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 leading-tight">Profesional<br>& Berpengalaman</h3>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 pt-4 md:pt-0 md:px-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-navy/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-handshake text-brand-navy text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 leading-tight">Ramah<br>& Responsif</h3>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 pt-4 md:pt-0 md:px-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-navy/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check-circle text-brand-navy text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 leading-tight">Solusi Tepat<br>& Terpercaya</h3>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 pt-4 md:pt-0 md:px-4 border-none">
+                        <div class="w-12 h-12 rounded-full bg-brand-navy/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-file-shield text-brand-navy text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 leading-tight">Kerahasiaan<br>Data Terjamin</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="layanan" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-10">
+                
+                <!-- Tax Services Card -->
+                <div class="bg-white rounded-3xl shadow-card overflow-hidden reveal border-t-4 border-brand-navy group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-brand-navy text-white p-8 flex items-center gap-6">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-file-invoice-dollar text-4xl text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <p class="text-brand-gold font-bold text-sm tracking-widest uppercase mb-1">Layanan</p>
+                            <h3 class="text-3xl font-extrabold tracking-tight">PERPAJAKAN</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <ul class="check-list space-y-4">
+                            <li>Konsultasi perpajakan</li>
+                            <li>Pelaporan SPT Tahunan</li>
+                            <li>Pelaporan SPT Masa</li>
+                            <li>Perhitungan dan rekonsiliasi pajak</li>
+                            <li>Pendampingan SP2DK</li>
+                            <li>Pendampingan pemeriksaan pajak</li>
+                            <li>Pendampingan penyelesaian permasalahan perpajakan</li>
+                            <li>Pendampingan administrasi dan kepatuhan pajak</li>
+                            <li>Konsultasi terkait kewajiban perpajakan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Accounting Services Card -->
+                <div class="bg-white rounded-3xl shadow-card overflow-hidden reveal delay-100 border-t-4 border-brand-navy group hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <div class="bg-brand-navy text-white p-8 flex items-center gap-6">
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-chart-line text-4xl text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <p class="text-brand-gold font-bold text-sm tracking-widest uppercase mb-1">Layanan</p>
+                            <h3 class="text-3xl font-extrabold tracking-tight">AKUNTANSI</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10 flex-grow">
+                        <ul class="check-list space-y-4">
+                            <li>Pembukuan usaha</li>
+                            <li>Penyusunan laporan keuangan</li>
+                            <li>Laporan laba rugi</li>
+                            <li>Neraca</li>
+                            <li>Rekonsiliasi transaksi</li>
+                            <li>Pencatatan pemasukan & pengeluaran</li>
+                            <li><strong class="text-brand-navy">Analisis laporan keuangan</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Callout Note inside Accounting -->
+                    <div class="mx-8 mb-8 bg-blue-50 border border-blue-100 rounded-2xl p-6 flex gap-4">
+                        <i class="fas fa-user-tie text-brand-navy text-3xl mt-1 opacity-80"></i>
+                        <p class="text-sm text-brand-navy font-medium leading-relaxed">
+                            Kami siap membantu Anda mengelola pajak dan keuangan dengan lebih mudah, teratur, dan sesuai dengan peraturan yang berlaku.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-navy rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden reveal">
+                <!-- Decorative background stroke -->
+                <div class="absolute -right-20 -bottom-20 opacity-10">
+                    <i class="fas fa-bullhorn text-[20rem] text-white"></i>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-10 items-center relative z-10">
+                    <div class="flex items-start gap-6 border-b lg:border-b-0 lg:border-r border-white/20 pb-8 lg:pb-0 lg:pr-8">
+                        <div class="flex-shrink-0 animate-pulse">
+                            <i class="fas fa-bullhorn text-5xl md:text-6xl text-brand-gold transform -rotate-12"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-4xl font-black text-white italic leading-tight">
+                                BINGUNG MENGHADAPI<br>
+                                <span class="text-brand-gold">PEMERIKSAAN<br>PAJAK?</span>
+                            </h2>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:pl-4">
+                        <p class="text-xl md:text-2xl text-white font-light leading-relaxed">
+                            <strong class="font-bold text-brand-gold">Jangan hadapi sendiri.</strong><br>
+                            Konsultasikan dan dapatkan pendampingan profesional untuk membantu memahami dan menyiapkan kebutuhan perpajakan Anda.
+                        </p>
+                        <a href="https://wa.me/6285178590919" target="_blank" class="inline-block mt-6 bg-white text-brand-navy font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition shadow-lg">
+                            Hubungi Kami Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak" class="bg-white pt-20 pb-10 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6 uppercase tracking-wider">
+                    Konsultasikan Pajak & Akuntansi Anda
+                </h3>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <!-- WhatsApp Number Big -->
+                    <a href="https://wa.me/6285178590919" target="_blank" class="flex items-center gap-4 bg-brand-light border-2 border-brand-navy rounded-full px-8 py-4 hover:bg-brand-navy hover:text-white transition-all group shadow-sm">
+                        <i class="fab fa-whatsapp text-4xl text-brand-navy group-hover:text-brand-gold transition-colors"></i>
+                        <span class="text-3xl md:text-5xl font-black text-brand-navy group-hover:text-white transition-colors">085178590919</span>
+                    </a>
+                    
+                    <!-- Free Consultation Badge -->
+                    <div class="bg-brand-navy text-white rounded-2xl p-4 shadow-lg text-center transform md:-rotate-6 hover:rotate-0 transition-transform">
+                        <p class="text-sm font-semibold uppercase tracking-widest text-brand-gold mb-1">Konsultasi</p>
+                        <p class="text-3xl font-black">GRATIS</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-center border-t border-b border-gray-100 py-10 mb-10 text-center md:text-left reveal delay-100">
+                <!-- Location/Mode -->
+                <div class="flex items-center justify-center md:justify-start gap-4">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-brand-navy text-xl">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-800 text-lg">Melayani</p>
+                        <p class="text-brand-navy font-semibold">Online & Offline</p>
+                    </div>
+                </div>
+
+                <!-- Tagline -->
+                <div class="text-center transform -skew-x-6">
+                    <p class="font-black text-2xl text-brand-navy italic">Pajak Aman,<br><span class="text-brand-gold">Bisnis Nyaman</span></p>
+                </div>
+
+                <!-- Logo Footer -->
+                <div class="flex justify-center md:justify-end">
+                    <div class="flex flex-col items-center md:items-end">
+                        <span class="text-4xl font-extrabold text-brand-navy tracking-tighter">B<span class="text-brand-gold">G</span></span>
+                        <span class="text-sm font-bold text-brand-navy leading-none tracking-wide mt-1">BG TAX CONSULTING</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center text-sm text-gray-500 font-medium">
+                <p>&copy; 2026 BG Tax Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.style.height = '5rem'; // Shrink slightly
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.style.height = '6rem'; // Original height
+            }
+        });
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+    </script>
+</body>
+</html>
