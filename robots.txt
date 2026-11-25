@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bgtax.web.id/sitemap.xml
